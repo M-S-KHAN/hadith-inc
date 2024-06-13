@@ -46,6 +46,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "/start - Subscribe to daily Hadith notifications\n"
         "/help - Get help and command usage\n"
         "/about - Learn more about this service and its creator\n"
+        "/stop - Unsubscribe from daily Hadith notifications\n\n"
         "Just stay tuned and receive a daily Hadith automatically, InshaAllah! 🕋"
     )
 
@@ -64,6 +65,18 @@ async def about(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "Thank you for using this service, and may it benefit you greatly. Aameen!",
         parse_mode='HTML'
     )
+    
+# stop the bot
+async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Unsubscribe from daily Hadith notifications."""
+    user_id = update.effective_user.id
+    try:
+        c.execute("DELETE FROM subscribers WHERE chat_id = ?", (user_id,))
+        conn.commit()
+        await update.message.reply_text("You have been unsubscribed from daily Hadith notifications. 😢")
+    except sqlite3.IntegrityError:
+        await update.message.reply_text("You are not subscribed to Hadith Inc. yet. 😇")
+        
 
 async def send_hadith(context: CallbackContext) -> None:
     """Send a random Hadith to all subscribers."""
@@ -114,10 +127,11 @@ def main() -> None:
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("about", about))
+    application.add_handler(CommandHandler("stop", stop))
 
-    # Schedule the daily Hadith to be sent every 30 seconds
-    application.job_queue.run_repeating(
-        send_hadith, interval=datetime.timedelta(seconds=5))
+    # Schedule the daily Hadith to be sent every day at 7:00 AM Pakistan Standard Time
+    application.job_queue.run_daily(send_hadith, time=datetime.time(hour=2, minute=0)) # 7:00 AM PST
+
 
     # Start the bot
     application.run_polling()
