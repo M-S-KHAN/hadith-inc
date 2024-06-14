@@ -1,11 +1,17 @@
+![Hadith Inc.](hadithinc.png)
+
 # Hadith Inc. (Hadith Bot for Telegram)
 
 The Hadith Bot is a Telegram bot designed to deliver a daily Hadith from major Islamic texts, such as Sahih Bukhari, Sahih Muslim, and Al-Tirmidhi, to subscribers.
+
+Join the Telegram bot: [Hadith Inc.](https://t.me/HadithIncBot)
+Follow the bot on Instagram: [Hadith Inc.](https://www.instagram.com/hadith.inc/)
 
 ## Features
 
 - **Daily Hadith Messages:** Sends a daily message to subscribers with a Hadith, including its details and translation.
 - **Multi-source Support:** Randomly selects a Hadith from Sahih Bukhari, Sahih Muslim, or Al-Tirmidhi.
+- **Deployment:** Currently deplyed on PythonAnywhere, ensuring 24/7 availability.
 
 ## Requirements
 
