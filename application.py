@@ -84,7 +84,7 @@ async def send_hadith(context: CallbackContext) -> None:
     books = {
         'sahih-bukhari': 7563,
         'sahih-muslim': 7500,
-        'al-tirmidhi': 4330
+        'al-tirmidhi': 3950
     }
 
     # Randomly select a book
@@ -129,8 +129,8 @@ def main() -> None:
     application.add_handler(CommandHandler("about", about))
     application.add_handler(CommandHandler("stop", stop))
 
-    # Schedule the daily Hadith to be sent every day at 7:00 AM Pakistan Standard Time
-    application.job_queue.run_daily(send_hadith, time=datetime.time(hour=2, minute=0)) # 7:00 AM PST
+    # Schedule the daily Hadith to be sent every day at 7:30 AM Pakistan Standard Time
+    application.job_queue.run_daily(send_hadith, time=datetime.time(hour=2, minute=30)) # 7:00 AM PST
 
 
     # Start the bot
