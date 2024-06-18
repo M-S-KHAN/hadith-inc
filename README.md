@@ -17,7 +17,7 @@ Follow the bot on Instagram: [Hadith Inc.](https://www.instagram.com/hadith.inc/
 
 - Python 3.8 or higher
 - Telegram Bot API
-- Various Python libraries: `python-telegram-bot`, `requests`, `sqlite3`
+- Various Python libraries: `python-telegram-bot`, `requests`, `sqlite3`, `datetime`, `logging`, `os`
 
 ## Setup Instructions
 
